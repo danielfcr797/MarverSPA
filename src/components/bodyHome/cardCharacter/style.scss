@@ -1,29 +1,44 @@
 .cont-main-card{
     display: flex;
-    width: 40%;
+    width: 43%;
     margin-bottom: 45px;
-    background-color: rgb(251, 251, 251);
+    background-color: white;
     padding: 0px 15px 15px;
     position: relative;
-    height: 300px;
+    height: auto;
     flex-direction: column;
     .cont-top-fixed{
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         position: absolute;
-        top: -15px;
+        top: -20px;
         left: -25px;
         .image-char{
-            width: 45%;
+            width: 40%;
             height: max-content;
             border-radius: 50%;
             box-shadow: 3px 3px 8px rgba(128, 128, 128, 0.839);
         }
         .cont-info-primary{
-            width: 50%;
+            width: 55%;
             h3{
                 transition: color 0.5s ;
+                color: #24292e;
+                font-size: 25px;
+                font-weight: 600;
+            }
+            div{
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 4;
+                line-clamp: 4;
+                overflow: hidden;
+                padding-right: 10px;
+                color: rgb(110, 110, 110);
+                font-size: 15px;
+                font-weight: 300;
+                margin-bottom: 15px;
             }
             button{
                 background-color: #ed1d24;
@@ -40,6 +55,62 @@
     .cont-top-fixed:hover{
         .cont-info-primary{
             h3{
+                color: #ed1d24;
+            }
+        }
+    }
+
+    .section-related{
+        display: flex;
+        flex-direction: row;
+        margin-top: 45%;
+        h4{
+            font-weight: 500;
+            
+            font-size: 25px;
+            color:#24292e ;
+        }
+        @media (max-width: 1280px) {
+            margin-top: 50%;
+        }
+        @media (max-width: 1150px) {
+            margin-top: 60%;
+        }
+    }
+
+
+
+    .section-grid-container{
+        margin-top: 15px;
+        display: grid;
+        grid-template:auto / 50% 50%;
+        grid-gap: 8px;
+        span{
+            display: flex;
+            flex-direction: row;
+            img{
+                margin-right: 10px;
+                width: 20px;
+                height: 20px;
+                margin-top: 4px;
+                display: none;
+                background-color: transparent;
+            }
+            h5{
+                color: rgb(110, 110, 110);
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .section-grid-container{
+        span:hover{
+            img{
+                background-color: transparent;
+                display: flex;
+            }
+            h5{
                 color: #ed1d24;
             }
         }

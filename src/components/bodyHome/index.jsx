@@ -3,6 +3,8 @@ import OrderByComponent from "../shared/orderBy";
 import characters from "../../assets/icons/characters.png"
 import './style.scss'
 import CardCharacterComponent from "./cardCharacter";
+import CardComicComponent from "./cardComic";
+import { Pagination } from "@mui/material";
 export default function ComponentBodyHome() {
 
     const [listOrder] = useState([
@@ -24,6 +26,10 @@ export default function ComponentBodyHome() {
         },
         
     ])
+
+    function handlePagination(e, newPage) {
+        console.log(e, newPage);
+    }
 
     return(
         <div className="cont-main-body">
@@ -48,11 +54,21 @@ export default function ComponentBodyHome() {
                     }
                 </div>
                 <div className="cont-paginator">
-                    paginador
+                    <Pagination
+                    count={10} 
+                    variant="outlined" 
+                    shape="rounded"
+                    onChange={handlePagination}
+                    />
                 </div>
             </div>
             <div className="section-rigth">
-                derecha
+                {
+                    listOrder.map((fav,i) =>(
+                        <CardComicComponent key={i}
+                        />
+                    ))
+                }
             </div>
         </div>
     )
