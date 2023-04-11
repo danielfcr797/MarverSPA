@@ -1,0 +1,47 @@
+.cont-main-card{
+    display: flex;
+    width: 40%;
+    margin-bottom: 45px;
+    background-color: rgb(251, 251, 251);
+    padding: 0px 15px 15px;
+    position: relative;
+    height: 300px;
+    flex-direction: column;
+    .cont-top-fixed{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        position: absolute;
+        top: -15px;
+        left: -25px;
+        .image-char{
+            width: 45%;
+            height: max-content;
+            border-radius: 50%;
+            box-shadow: 3px 3px 8px rgba(128, 128, 128, 0.839);
+        }
+        .cont-info-primary{
+            width: 50%;
+            h3{
+                transition: color 0.5s ;
+            }
+            button{
+                background-color: #ed1d24;
+                padding: 10px 15px;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                color: white;
+                font-size: 15px;
+            }
+        }
+    }
+
+    .cont-top-fixed:hover{
+        .cont-info-primary{
+            h3{
+                color: #ed1d24;
+            }
+        }
+    }
+}
