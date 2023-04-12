@@ -57,9 +57,25 @@ async function getDetailComic(url) {
         )
         return response.data.data?.results[0]
     } catch (error) {
-        
+        return error
     }
     
 }
 
-export { searchCharacter, getDetailComic };
+async function getAllComicsById(id) {
+
+    try {
+        const response = await axios.get(
+            process.env.REACT_APP_API_URL + 
+            process.env.REACT_APP_API_URI + 
+            `characters/${id}/comics` +
+            UrlAuth
+        )
+            return response.data.data
+    } catch (error) {
+        return error
+    }
+    
+}
+
+export { searchCharacter, getDetailComic, getAllComicsById   };

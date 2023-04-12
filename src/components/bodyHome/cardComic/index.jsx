@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import iconDel from "../../../assets/icons/btn-delete.png"
 import test from "../../../assets/images/logo.png"
 import './style.scss'
 
-export default function CardComicComponent(render, data) {
+export default function CardComicComponent({render, dataComic, openModal}) {
     
+    const [infoComic , setInfoComic] = useState({})
+
+
+    function openModalDetail(info) {
+        if (info.resourceURI) {
+            openModal(info.resourceURI)
+        }
+    }
+
+    useEffect(()=>{
+        if (dataComic) {
+            setInfoComic(dataComic);
+        }
+    },[dataComic])
     return(
         <React.Fragment>
         {
@@ -19,10 +33,10 @@ export default function CardComicComponent(render, data) {
 
             : 
             
-            <div className="cont-main-card-comic">
-                <img src={test} alt="" className="cover-comic" />
+            <div className="cont-main-card-comic" onClick={()=> openModalDetail(infoComic)}>
+                <img src={`${infoComic?.thumbnail?.path}.${infoComic?.thumbnail?.extension}`} alt="" className="cover-comic" />
                 <div className="title-comic">
-                    spiderman y los 7 enanitos contra hulck
+                    {infoComic?.title}
                 </div>
             </div>
         }

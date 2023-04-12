@@ -14,7 +14,9 @@ export default function CardCharacterComponent({data, openModal}) {
     }
 
     function handleModal(url) {
-        openModal(url.resourceURI)
+        if (url.resourceURI) {
+            openModal(url.resourceURI)
+        }
         
     }
 
