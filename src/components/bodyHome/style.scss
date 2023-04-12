@@ -1,11 +1,11 @@
 .cont-main-body{
-    background-color: rebeccapurple;
     height: auto;
     min-height: 650px;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: rgb(222, 222, 222);
     .section-left{
         width: calc(75% - 55px );
         background-color: rgb(231, 231, 231);
@@ -53,13 +53,16 @@
 
     }
     .section-rigth{
-        width: calc(25% - 40px);
-        padding: 40px 20px;
+        width: calc(25% - 55px);
+        margin: 40px 15px 40px 20px;
+        padding-right: 20px;
         height: auto;
         background-color: rgb(222, 222, 222);
         display: flex;
         align-items: center;
         flex-direction: column;
+        max-height: 2300px;
+        overflow-y: scroll;
         .cont-title{
             display: flex;
             flex-direction: row;
@@ -78,5 +81,20 @@
                 color: #24292e;
             }
         }
+    }
+
+    .section-rigth::-webkit-scrollbar {
+        width: 10px;
+    }
+    .section-rigth::-webkit-scrollbar-track {
+        border:none;
+        border-radius: 10px;
+    }
+    .section-rigth::-webkit-scrollbar-thumb {
+        background: gray; 
+        border-radius: 10px;
+    }
+    .section-rigth::-webkit-scrollbar-thumb:hover {
+        background: rgb(93, 93, 93); 
     }
 }

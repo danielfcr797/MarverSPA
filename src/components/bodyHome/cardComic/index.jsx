@@ -3,10 +3,9 @@ import iconDel from "../../../assets/icons/btn-delete.png"
 import test from "../../../assets/images/logo.png"
 import './style.scss'
 
-export default function CardComicComponent({render, dataComic, openModal}) {
+export default function CardComicComponent({render, dataComic, openModal,deleteFavorites}) {
     
     const [infoComic , setInfoComic] = useState({})
-
 
     function openModalDetail(info) {
         if (info.resourceURI) {
@@ -19,15 +18,17 @@ export default function CardComicComponent({render, dataComic, openModal}) {
             setInfoComic(dataComic);
         }
     },[dataComic])
+
+
     return(
         <React.Fragment>
         {
             render === 'home' ?
             <div className="cont-main-card-home">
-                <img src={iconDel} className="icon-delete" alt="" />
-                <img src={test} alt="" className="cover-comic" />
+                <img src={iconDel} className="icon-delete" alt="" onClick={() => deleteFavorites(infoComic.id)} />
+                <img src={`${infoComic?.path}.${infoComic?.extension}`} alt="" className="cover-comic" />
                 <div className="title-comic">
-                    spiderman y los 7 enanitos contra hulck
+                    {infoComic?.title}
                 </div>
             </div>
 

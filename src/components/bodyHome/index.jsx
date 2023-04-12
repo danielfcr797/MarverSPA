@@ -9,6 +9,8 @@ import { Pagination } from "@mui/material";
 import { searchCharacter } from "../../API/search";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ModalDetailComic from "../modalDetail";
+import { CONSTANT } from "../../config/CONSTANT";
+import { toast } from "react-toastify";
 
 export default function ComponentBodyHome() {
 
@@ -18,6 +20,7 @@ export default function ComponentBodyHome() {
         orderBy:''
     });
     const [searchParams] = useSearchParams()
+    const [comicsFav, setComicsFav]  = useState(JSON.parse(localStorage.getItem(CONSTANT.COMICS_FAV))); 
     const location = useLocation();
     const navigate = useNavigate()
     const [listOrder] = useState([
@@ -69,9 +72,15 @@ export default function ComponentBodyHome() {
         }
     }
 
+    function removeFavorites(id) {
+        let newArr = comicsFav.filter(el => el.id !== id);
+        setComicsFav(newArr); 
+        localStorage.setItem(CONSTANT.COMICS_FAV,JSON.stringify(newArr));
+        toast('Deleted successfully', {type:"success"})
+    }
+
     function closeModal() {
         setShowModalComic(false);
-        
     }
 
 
@@ -133,12 +142,16 @@ export default function ComponentBodyHome() {
                         <h4>My favourites</h4>
                     </div>
                     {
-                        listOrder.map((fav,i) =>(
+                        comicsFav ?
+                        comicsFav.map((fav,i) =>(
                             <CardComicComponent 
+                            dataComic={fav}
                             render={'home'}
+                            deleteFavorites={removeFavorites}
                             key={i}
                             />
                         ))
+                        : 'no hay favoritos'
                     }
                 </div>
             </div>
@@ -146,6 +159,7 @@ export default function ComponentBodyHome() {
                 showModalComic ? 
                 <ModalDetailComic
                 closeModal={closeModal}
+                setFav={setComicsFav}
                 url={urlComic}
                 /> : ''
             }
