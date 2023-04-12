@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.scss';
 import Router from './routes'
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-ReactDOM.render(
-  <Router/>, document.getElementById('root')
-);
+root.render(<Router/>)

@@ -13,20 +13,30 @@
         flex-direction: row;
         position: absolute;
         top: -20px;
+        width: 100%;
         left: -25px;
         .image-char{
-            width: 40%;
-            height: max-content;
+            width: 195px;
+            height: 195px;
             border-radius: 50%;
             box-shadow: 3px 3px 8px rgba(128, 128, 128, 0.839);
         }
         .cont-info-primary{
             width: 55%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
             h3{
                 transition: color 0.5s ;
                 color: #24292e;
                 font-size: 25px;
                 font-weight: 600;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                line-clamp: 1;
+                overflow: hidden;
             }
             div{
                 display: -webkit-box;
@@ -100,6 +110,11 @@
                 color: rgb(110, 110, 110);
                 font-size: 18px;
                 font-weight: 400;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                overflow: hidden;
             }
         }
     }
