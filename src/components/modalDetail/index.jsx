@@ -53,6 +53,11 @@ export default function ModalDetailComic({closeModal, url , setFav}) {
         }
     }
 
+    function handleBuy() {
+        toast('functionality is not available',{type:'error'})
+        closeModal()
+    }
+
     useEffect(()=>{
         if (url) {
             detailComic(url)
@@ -72,7 +77,7 @@ export default function ModalDetailComic({closeModal, url , setFav}) {
                 </div>
                 <div className="cont-actions-modal">
                     <button className="add"  onClick={()=> handleAddFavorites()} > <img src={scude} alt="" /> Add favotires</button>
-                    <button className="buy"> <img src={shopp} alt="" /> buy  {dataComic.prices ? `for $${dataComic.prices[0].price}` : '' }</button>
+                    <button className="buy"> <img src={shopp} alt="" onClick={() => handleBuy()} /> buy  {dataComic.prices ? `for $${dataComic.prices[0].price}` : '' }</button>
 
                 </div>
                 <img src={close} className="close-modal" alt="" onClick={closeModal} />

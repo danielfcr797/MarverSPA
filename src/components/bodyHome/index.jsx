@@ -83,6 +83,15 @@ export default function ComponentBodyHome() {
         setShowModalComic(false);
     }
 
+    function handleParam(param) {
+        let clone = {...params}
+        if (param) {
+            clone.orderBy = param
+            setParams(clone);
+            
+        }
+    }
+
 
     useEffect(()=>{
         let searchP = searchParams.get('search');
@@ -99,6 +108,10 @@ export default function ComponentBodyHome() {
         getCharacter(clone)
     }, [location])
 
+    useEffect(()=>{
+        getCharacter(params)
+    },[params])
+
     return(
         <React.Fragment>
             <div className="cont-main-body">
@@ -110,6 +123,7 @@ export default function ComponentBodyHome() {
                         </div>
                         <OrderByComponent 
                         list={listOrder}
+                        setPar={handleParam}
                         />
                     </div>
 
