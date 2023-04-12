@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
 import arrow from '../../../assets/icons/link-arrow.png'
 import './style.scss'
+import { useNavigate } from "react-router-dom";
 
-export default function CardCharacterComponent({data}) {
+export default function CardCharacterComponent({data, openModal}) {
 
     const [infoChar, setInfoChar] = useState({});
     const [relatedComics, setRelatedComics] = useState([])
+    const navigate = useNavigate()
+
+    function handleClick() {
+        navigate(`/comics/${infoChar.id}`);
+    }
+
+    function handleModal(url) {
+        openModal(url.resourceURI)
+        
+    }
 
     useEffect(()=>{
         if (data) {
@@ -22,7 +33,7 @@ export default function CardCharacterComponent({data}) {
                 <div className="cont-info-primary">
                     <h3>{infoChar?.name}</h3>
                     <div>{infoChar?.description}</div>
-                    <button>VIEW MORE</button>
+                    <button onClick={() => handleClick()}>VIEW MORE</button>
                 </div>
             </div>
             <div className="section-related">
@@ -31,7 +42,7 @@ export default function CardCharacterComponent({data}) {
             <div className="section-grid-container">
                 {
                     relatedComics.map((rel,i) =>(
-                        <span key={i}>
+                        <span key={i} onClick={()=> handleModal(rel)}>
                             <img src={arrow} alt="" />
                             <h5>{rel.name}</h5>
                         </span>

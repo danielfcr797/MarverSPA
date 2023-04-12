@@ -1,5 +1,8 @@
 import  axios  from "axios";
 
+
+const UrlAuth = `?ts=${process.env.REACT_APP_TS}&apikey=${process.env.REACT_APP_KEY_PUBLIC}&hash=${process.env.REACT_APP_HASH}`
+
 async function searchCharacter(params) {
 
     let URL = `characters?ts=${process.env.REACT_APP_TS}&apikey=${process.env.REACT_APP_KEY_PUBLIC}&hash=${process.env.REACT_APP_HASH}&limit=10`
@@ -33,7 +36,6 @@ async function searchCharacter(params) {
     
     }
 
-
     try {
         const response = await axios.get(
             process.env.REACT_APP_API_URL + 
@@ -46,4 +48,18 @@ async function searchCharacter(params) {
     }
 }
 
-export { searchCharacter };
+
+async function getDetailComic(url) {
+
+    try {
+        const response = await axios.get(
+            url + UrlAuth
+        )
+        return response.data.data?.results[0]
+    } catch (error) {
+        
+    }
+    
+}
+
+export { searchCharacter, getDetailComic };

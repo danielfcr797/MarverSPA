@@ -8,6 +8,7 @@ import CardComicComponent from "./cardComic";
 import { Pagination } from "@mui/material";
 import { searchCharacter } from "../../API/search";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import ModalDetailComic from "../modalDetail";
 
 export default function ComponentBodyHome() {
 
@@ -41,7 +42,8 @@ export default function ComponentBodyHome() {
     const [characters, setCharacters] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-
+    const [showModalComic, setShowModalComic] = useState(false);
+    const [urlComic, setUrlComic] = useState('');
 
     function handlePagination(e, newPage) {
         setCurrentPage(parseInt(newPage));
@@ -60,6 +62,17 @@ export default function ComponentBodyHome() {
         }
     }
 
+    function handleOpenModal(url) {
+        if (url) {
+            setShowModalComic(true);
+            setUrlComic(url);
+        }
+    }
+
+    function closeModal() {
+        setShowModalComic(false);
+        
+    }
 
 
     useEffect(()=>{
@@ -78,51 +91,65 @@ export default function ComponentBodyHome() {
     }, [location])
 
     return(
-        <div className="cont-main-body">
-            <div className="section-left">
-                <div className="top">
-                    <div className="cont-title">
-                        <img src={charactersIcon} alt="" />
-                        <h4>Characters</h4>
-                    </div>
-                    <OrderByComponent 
-                    list={listOrder}
-                    />
-                </div>
-
-                <div className="cont-list-results">
-                    {
-
-                    characters.map((char,i) => (
-                        <CardCharacterComponent data={char} key={i}
+        <React.Fragment>
+            <div className="cont-main-body">
+                <div className="section-left">
+                    <div className="top">
+                        <div className="cont-title">
+                            <img src={charactersIcon} alt="" />
+                            <h4>Characters</h4>
+                        </div>
+                        <OrderByComponent 
+                        list={listOrder}
                         />
-                    ))
+                    </div>
+
+                    <div className="cont-list-results">
+                        {
+
+                        characters.map((char,i) => (
+                            <CardCharacterComponent
+                             data={char} 
+                             key={i}
+                             openModal={handleOpenModal}
+                            />
+                        ))
+                        }
+                    </div>
+                    <div className="cont-paginator">
+                        <Pagination
+                        count={totalPages} 
+                        page={currentPage}
+                        variant="outlined" 
+                        shape="rounded"
+                        onChange={handlePagination}
+                        siblingCount={1} boundaryCount={2}
+                        />
+                    </div>
+                </div>
+                <div className="section-rigth">
+                    <div className="cont-title">
+                        <img src={favourites} alt="" />
+                        <h4>My favourites</h4>
+                    </div>
+                    {
+                        listOrder.map((fav,i) =>(
+                            <CardComicComponent 
+                            render={'home'}
+                            key={i}
+                            />
+                        ))
                     }
                 </div>
-                <div className="cont-paginator">
-                    <Pagination
-                    count={totalPages} 
-                    page={currentPage}
-                    variant="outlined" 
-                    shape="rounded"
-                    onChange={handlePagination}
-                    siblingCount={1} boundaryCount={2}
-                    />
-                </div>
             </div>
-            <div className="section-rigth">
-                <div className="cont-title">
-                    <img src={favourites} alt="" />
-                    <h4>My favourites</h4>
-                </div>
-                {
-                    listOrder.map((fav,i) =>(
-                        <CardComicComponent key={i}
-                        />
-                    ))
-                }
-            </div>
-        </div>
+            {
+                showModalComic ? 
+                <ModalDetailComic
+                closeModal={closeModal}
+                url={urlComic}
+                /> : ''
+            }
+        </React.Fragment>
     )
     
 }
